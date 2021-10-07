@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900');
+
+:root {
+--font: 'Lato',
+sans-serif;
+--big: 'Montserrat',
+sans-serif;
+
+--red: #EF2F3C;
+--white: #F6F4F3;
+--blue: #276FBF;
+--dark: #183059;
+--yellow: #F0A202;
+}
+
+
+html {
+  display: grid;
+  min-height: 100%;
+}
+
+body {
+  display: grid;
+  background: var(--dark);
+}
+
+.container {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 650px;
+  height: 480px;
+}
+
+h1 {
+  font-family: var(--font);
+  text-align: center;
+  margin-top: 2em;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: var(--white);
+}
+
+#timer-1 {
+  color: var(--white);
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--font);
+  font-size: .7em;
+  letter-spacing: 5px;
+  margin-top: 25%;
+}
+
+.field {
+  display: inline-block;
+  padding: 20px;
+  width: 100px;
+  border-radius: 5px;
+}
+
+.field:nth-child(1) {
+  background: var(--red);
+}
+
+.field:nth-child(2) {
+  background: var(--white);
+  color: var(--dark);
+}
+
+.field:nth-child(3) {
+  background: var(--blue);
+}
+
+.field:nth-child(4) {
+  background: var(--yellow);
+
+}
+
+[data-value="days"],
+[data-value="hours"],
+[data-value="mins"],
+[data-value="secs"] {
+  font-family: var(--big);
+  color: var(--dark);
+  font-size: 4em;
+}
+
+
