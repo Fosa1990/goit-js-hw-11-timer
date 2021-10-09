@@ -7,38 +7,37 @@ export default class CountdownTimer {
     this._secsEL = this._selectorEL.querySelector('[data-value=secs]');
     this._time = targetDate;
     this._intervalId = null;
-    this._deltaTime = 0;
-
-    this.start();
+    this._isActive = false;
   }
 
   start() {
+    if (this._isActive) {
+      return;
+    }
+
+    this._isActive = true;
     this._intervalId = setInterval(() => {
-      let currentTime = Date.now();
-      this._deltaTime = this._time - currentTime;
-
-      const days = this.pad(
-        Math.floor(this._deltaTime / (1000 * 60 * 60 * 24)),
-      );
-      const hours = this.pad(
-        Math.floor(
-          (this._deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        ),
-      );
-      const mins = this.pad(
-        Math.floor((this._deltaTime % (1000 * 60 * 60)) / (1000 * 60)),
-      );
-      const secs = this.pad(Math.floor((this._deltaTime % (1000 * 60)) / 1000));
-
-      this.insertValues(days, hours, mins, secs);
+      const time = this.getTimeComponents(this._time - Date.now());
+      this.insertValues(time);
     }, 1000);
+  }
+
+  getTimeComponents(time) {
+    const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+    const hours = this.pad(
+      Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    );
+    const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+    const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+
+    return { days, hours, mins, secs };
   }
 
   pad(value) {
     return String(value).padStart(2, '0');
   }
 
-  insertValues(days, hours, mins, secs) {
+  insertValues({ days, hours, mins, secs }) {
     this._daysEL.textContent = days;
     this._hoursEL.textContent = hours;
     this._minsEL.textContent = mins;
